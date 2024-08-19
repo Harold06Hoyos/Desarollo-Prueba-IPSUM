@@ -16,7 +16,7 @@ body {
 
 .image-container {
   flex: 1;
-  background-image: url("../Imagenes/Sapo_samuari.png");
+  background-image: url("../Imagenes/register.image.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

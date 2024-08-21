@@ -1,38 +1,20 @@
 <?php
 class Conexion
 {
-    public $con;
 
-    public function __construct()
+    private $host = "localhost";
+    private $user = "root";
+    private $password = "";
+    private $database = "prueba_de_desarrollo";
+
+    public function conMysql()
     {
 
-        try {
-            $this->con = new mysqli('localhost', 'root', '', 'registro_usuarios');
-        } catch (Exception $pe) {
-            echo "Error en la Conexion" . $pe->getMessage();
+        $conexion = new mysqli($this->host, $this->user, $this->password, $this->database);
+
+        if ($conexion->connect_error) {
+            die("Error de conexion:" . $conexion->connect_error);
         }
-    }
-
-    public function getConn()
-    {
-        return $this->con;
-    }
-
-    public function limpiarCadena($cadena)
-    {
-
-        $palabras = ["<script>", "</script>", "<script src", "<script type=", "SELECT * FROM", "SELECT ", " SELECT ", "DELETE FROM", "INSERT INTO", "DROP TABLE", "DROP DATABASE", "TRUNCATE TABLE", "SHOW TABLES", "SHOW DATABASES", "<?php", "?>", "--", "^", "<", ">", "==", "=", ";", "::"];
-
-        $cadena = trim($cadena);
-        $cadena = stripslashes($cadena);
-
-        foreach ($palabras as $palabra) {
-            $cadena = str_ireplace($palabra, "", $cadena);
-        }
-
-        $cadena = trim($cadena);
-        $cadena = stripslashes($cadena);
-
-        return $cadena;
+        return $conexion;
     }
 }

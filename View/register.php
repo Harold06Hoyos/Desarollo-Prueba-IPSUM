@@ -1,15 +1,3 @@
-<?php
-//require_once 'database.php';
-require_once '../Model/conexion.php';
-require_once '../Controller/user_controller.php';
-//$model = new user_model($db);
-
-/*if (isset($_GET['controller']) && isset($_GET['action'])) {
-    if ($_GET['controller'] == 'UserController' && $_GET['action'] == 'register') {
-        $controller->register();
-    }
-}*/
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -18,7 +6,7 @@ require_once '../Controller/user_controller.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro WePlot</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/register/register.css">
+    <link rel="stylesheet" href="../View/css/register/register.css">
 </head>
 
 <body>
@@ -28,7 +16,7 @@ require_once '../Controller/user_controller.php';
 
         <div class="form-container">
             <div class="header-image-container">
-                <img src="Imagenes/Header.png" alt="Imagen superior" class="header-image">
+                <img src="Css/Imagenes/Header.png" alt="Imagen superior" class="header-image">
             </div>
 
             <div class="social-buttons">
@@ -42,7 +30,7 @@ require_once '../Controller/user_controller.php';
             </div>
 
             <!-- Formulario modificado -->
-            <form action="../controller/user_controller.php" method="POST" enctype="multipart/form-data">
+            <form action="../controller/ctr_register.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label for="nombre">Nombre*</label>
@@ -99,7 +87,7 @@ require_once '../Controller/user_controller.php';
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="confirmar-contrasena">Confirmar contraseña*</label>
-                        <input type="password" class="form-control" id="confirmar-contrasena" name="contrasena2" required>
+                        <input type="password" class="form-control" id="confirmar-contrasena" name="confirmar_contrasena" required>
                     </div>
                 </div>
 

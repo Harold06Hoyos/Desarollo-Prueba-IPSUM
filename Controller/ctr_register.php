@@ -1,6 +1,8 @@
 <?php
 require_once("../Model/conexion.php");
 require_once("../Model/val_register.php");
+require_once("../Model/val_preguntas.php");
+
 
 $conexion = new Conexion();
 $conn = $conexion->conMysql();
@@ -16,9 +18,6 @@ $contrasena = $_POST['contrasena'];
 $confirmar_contrasena = $_POST['confirmar_contrasena'];
 $rol = "1";
 
-echo "<script>
-        console.log('nombre:$nombre')
- </script>";
 // ----------------------------------------------------------
 // preguntas
 $comida_favorita = $_POST['comida_favorita'];
@@ -28,7 +27,26 @@ $color_favorito = $_POST['color_favorito'];
 
 // ----------------------------------------------------------
 // metodos
+
+// ----------------------------------------------------------
+$register = new valRegister();
+$register->validarLongitudMinima($nombre);
+// encriptar contraseña
+$passHash = password_hash($contrasena, PASSWORD_BCRYPT);
+//------------------------------------------------------------
+
+//Registras usuario
 $register = new valRegister();
 $register->existUser($email, $conn);
 $register->comparePassword($confirmar_contrasena, $contrasena);
-$register->registerUser($nombre, $apellido, $email, $telefono, $pais, $contrasena, $rol, $conn);
+$register->registerUser($nombre, $apellido, $email, $telefono, $pais, $passHash, $rol, $conn);
+
+
+//------------------------------------------------------------
+
+
+$UserId = $register->getUserId($conn);
+
+//$entero = (int) $UserId;
+$preguntas = new valRegister();
+$preguntas->agregarPreguntas($comida_favorita, $artista_favorito, $lugar_favorito, $color_favorito, $UserId, $conn);

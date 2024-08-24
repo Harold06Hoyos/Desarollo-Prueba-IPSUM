@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="css/imagenes/logo.ico" type="image/x-icon">
+
     <title>Registro WePlot</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../View/css/register/register.css">
@@ -92,13 +94,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="foto" class="custom-file-upload">
-                        <input type="file" id="foto" name="foto" accept=".jpg,.png,.pdf">
-                        Foto de perfil (jpg o PDF de máximo 10 MB)
-                    </label>
+                    <label for="foto">Seleccione un Archivo</label>
+                    <input type="file" class="form-control-file" name="foto" id="foto" required>
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">Registrarse</button>
+
             </form>
         </div>
     </div>

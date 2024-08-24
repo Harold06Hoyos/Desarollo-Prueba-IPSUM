@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="css/imagenes/logo.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../View/css/login/login.css">
@@ -16,13 +17,12 @@
         </div>
         <div class="login-container">
             <h2>Login</h2>
-            <?php if (isset($error)) echo "<p class='error-message'>$error</p>"; ?>
-            <form method="POST" action="/login">
-                <label for="email">Email:</label>
+            <form action="../controller/ctr_login.php" method="POST"">
+                <label for=" email">Email:</label>
                 <input type="email" name="email" required>
                 <br>
                 <label for="password">Password:</label>
-                <input type="password" name="password" required>
+                <input type="password" name="contrasena" required>
                 <br>
                 <input type="submit" value="Login">
             </form>

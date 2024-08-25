@@ -1,6 +1,7 @@
 <?php
 require_once("../Model/conexion.php");
 require_once("../Model/val_register.php");
+require_once("../Model/enviaremail.php");
 
 $conexion = new Conexion();
 $conn = $conexion->conMysql();
@@ -16,6 +17,8 @@ $contrasena = $_POST['contrasena'];
 $confirmar_contrasena = $_POST['confirmar_contrasena'];
 $foto = $_FILES['foto'];
 $rol = "1";
+
+
 
 // ----------------------------------------------------------
 // preguntas
@@ -39,6 +42,9 @@ $register = new valRegister();
 $register->existUser($email, $conn);
 $register->comparePassword($confirmar_contrasena, $contrasena);
 $register->registerUser($nombre, $apellido, $email, $telefono, $pais, $passHash, $rol, $foto, $conn);
+
+$enviarEmail = new enviarEmailmain();
+$enviarEmail->enviarEmail($email);
 //------------------------------------------------------------
 
 

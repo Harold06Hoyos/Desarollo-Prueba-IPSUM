@@ -37,9 +37,9 @@ class logUser
             if ($sql->num_rows > 0) {
                 $datos = $sql->fetch_assoc();
                 $contrasenaHash = $datos["contrasena"];
-                $email = $datos["email"];
+                $userId = $datos["user_id"];
                 if (password_verify($contrasena, $contrasenaHash)) {
-                    $_SESSION["email"] = $email;
+                    $_SESSION["userId"] = $userId;
                     echo '<script>window.location.href="../view/dashboard.php";</script>';
                 } else {
                     echo "

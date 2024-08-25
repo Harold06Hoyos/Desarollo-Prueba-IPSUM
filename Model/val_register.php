@@ -54,62 +54,134 @@ class valRegister
         }
     }
 
-    function validarLongitudMinima($nombre, $longitudMinima = 5)
+    public function validarLongitudMinima($nombre)
     {
-        if (strlen($nombre) < $longitudMinima) {
-            return "El campo $nombre debe tener al menos $longitudMinima caracteres.";
-        }
-        return true;
-    }
+        $longitud = strlen($nombre);
 
-    // registro de usuario
-    public function registerUser($nombre, $apellido, $email, $telefono, $pais, $passHash, $rol, $conexion)
-    {
-        $sql = "INSERT INTO usuarios (first_name, last_name, email, phone, country, contrasena, role) VALUES ('$nombre', '$apellido', '$email', '$telefono', '$pais', '$passHash', '$rol')";
         try {
-            $ejecutar = mysqli_query($conexion, $sql);
-            if ($ejecutar) {
-                echo "
-                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-                    <script language='JavaScript'>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Usuario Almacenado Exitosamente',
-                            showCancelButton: false,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
-                            timer: 5000
-                        }).then(() => {
-                            location.assign('../view/user_login.php');
-                        });
-                    });
-                    </script>";
+            if ($longitud < 5) {
+                echo "El campo debe tener al menos 5 caracteres.";
             } else {
-                echo "
-                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-                    <script language='JavaScript'>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'El email:  $email, ya se encuentra registrado',
-                            showCancelButton: false,
-                            confirmButtonColor: '#FF0000',
-                            confirmButtonText: 'OK',
-                            timer: 5000
-                        }).then(() => {
-                            location.assign('../view/register.php');
-                        });
-                    });
-                    </script>";
+
+                echo "Campo válido, se procederá a almacenar.";
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
+        } // Validar la longitud
+
+    }
+
+    function subirArchivo($cedula, $registrador, $programa, $fecha, $certificador, $archivo)
+    {
+        $nombreArchivo = $archivo['name'];
+        $archivoTemporal = $archivo['tmp_name'];
+
+        // Ruta relativa al directorio accesible desde el navegador
+        $carpetaDestino = '../archivos/';
+
+        // Crear la ruta completa
+        $rutaDestino = $carpetaDestino . basename($nombreArchivo);
+
+        // Mover el archivo al destino
+        if (move_uploaded_file($archivoTemporal, $rutaDestino)) {
+            $conexion = new Conexion();
+            $conn = $conexion->conMysql();
+
+            // Usar consultas preparadas para prevenir inyección SQL
+            $sql = "INSERT INTO tbl_certificados (cedula, registrador, programa, fecha, certificador, nombre_archivo, archivo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssssss", $cedula, $registrador, $programa, $fecha, $certificador, $nombreArchivo, $rutaDestino);
+
+            // Ejecutar la consulta y cerrar la conexión
+            if ($stmt->execute()) {
+                $stmt->close();
+                $conn->close();
+                return true; // Éxito
+            } else {
+                // Manejar errores de SQL aquí
+                error_log("Error al ejecutar la consulta: " . $stmt->error);
+            }
+        }
+
+        return false; // Error
+    }
+
+
+
+    // registro de usuario
+    public function registerUser($nombre, $apellido, $email, $telefono, $pais, $passHash, $rol, $foto, $conexion)
+    {
+
+        $nombreArchivo = $foto['name'];
+        $archivoTemporal = $foto['tmp_name'];
+
+        $carpetaDestino = 'C:/wamp64/www/Desarollo-Prueba-IPSUM-1/archivos/';
+        $rutaDestino = $carpetaDestino . $nombreArchivo;
+
+        if (move_uploaded_file($archivoTemporal, $rutaDestino)) {
+            $sql = "INSERT INTO usuarios (first_name, last_name, email, phone, country, contrasena, role, archivo) VALUES ('$nombre', '$apellido', '$email', '$telefono', '$pais', '$passHash', '$rol', '$rutaDestino')";
+            try {
+                $ejecutar = mysqli_query($conexion, $sql);
+                if ($ejecutar) {
+                    echo "
+                        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                        <script language='JavaScript'>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Usuario Almacenado Exitosamente',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK',
+                                timer: 5000
+                            }).then(() => {
+                                location.assign('../view/user_login.php');
+                            });
+                        });
+                        </script>";
+                } else {
+                    echo "
+                        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                        <script language='JavaScript'>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'El email:  $email, ya se encuentra registrado',
+                                showCancelButton: false,
+                                confirmButtonColor: '#FF0000',
+                                confirmButtonText: 'OK',
+                                timer: 5000
+                            }).then(() => {
+                                location.assign('../view/register.php');
+                            });
+                        });
+                        </script>";
+                }
+            } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        } else {
+            echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script language='JavaScript'>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Salio mal al mover el archivo',
+                    showCancelButton: false,
+                    confirmButtonColor: '#FF0000',
+                    confirmButtonText: 'OK',
+                    timer: 5000
+                }).then(() => {
+                    location.assign('../view/register.php');
+                });
+            });
+            </script>";
         }
     }
 
     // Agregar preguntas
-    public function agregarPreguntas($comida_favorita, $artista_favorito, $lugar_favorito, $color_favorito, $user_id, $conexion)
+    public function agregarPreguntas($comida_favorita, $artista_favorito, $lugar_favorito, $color_favorito, $user_id,  $conexion)
     {
         // Establecer la consulta SQL
         $sql = "INSERT INTO preguntas (favorite_food, favorite_artist, favorite_place, favorite_color, user_id) VALUES ('$comida_favorita', '$artista_favorito', '$lugar_favorito', '$color_favorito', $user_id)";

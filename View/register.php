@@ -98,8 +98,15 @@
                     <input type="file" class="form-control-file" name="foto" id="foto" required>
                 </div>
 
-                <button type="submit" class="btn btn-success w-100">Registrarse</button>
-
+                <div class="row">
+                    <div class=" col-md-6 form-group">
+                        <button type=" submit" class="btn btn-success w-100">Registrarse</button>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <button class="btn btn-success w-100"" onclick=" location.href='user_login.php'">¿Ya tienes cuenta?</button>
+                        
+                    </div>
+                </div>
             </form>
         </div>
     </div>

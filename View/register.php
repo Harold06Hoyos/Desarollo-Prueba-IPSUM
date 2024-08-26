@@ -92,7 +92,8 @@
                         <input type="password" class="form-control" id="confirmar-contrasena" name="confirmar_contrasena" required>
                     </div>
                 </div>
-
+                <div class="g-recaptcha" data-sitekey="6LfjIS8qAAAAAINSCmbPB4W2znXE5sr0MjDZyQQs"></div>
+                <br>
                 <div class="form-group">
                     <label for="foto">Seleccione un Archivo</label>
                     <input type="file" class="form-control-file" name="foto" id="foto" required>
@@ -110,6 +111,7 @@
             </form>
         </div>
     </div>
+    <script src=" https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 
 </html>

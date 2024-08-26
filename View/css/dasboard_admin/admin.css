@@ -234,78 +234,6 @@ tbody td.active {
   position: relative;
 }
 
-.export__file .export__file-btn {
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  background: #fff6 url(../images/export.png) center / 80% no-repeat;
-  border-radius: 50%;
-  transition: 0.2s ease-in-out;
-}
-
-.export__file .export__file-btn:hover {
-  background-color: #fff;
-  transform: scale(1.15);
-  cursor: pointer;
-}
-
-.export__file input {
-  display: none;
-}
-
-.export__file .export__file-options {
-  position: absolute;
-  right: 0;
-
-  width: 12rem;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  text-align: center;
-
-  opacity: 0;
-  transform: scale(0.8);
-  transform-origin: top right;
-
-  box-shadow: 0 0.2rem 0.5rem #0004;
-
-  transition: 0.2s;
-}
-
-.export__file input:checked + .export__file-options {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 100;
-}
-
-.export__file .export__file-options label {
-  display: block;
-  width: 100%;
-  padding: 0.6rem 0;
-  background-color: #f2f2f2;
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  transition: 0.2s ease-in-out;
-}
-
-.export__file .export__file-options label:first-of-type {
-  padding: 1rem 0;
-  background-color: #86e49d !important;
-}
-
-.export__file .export__file-options label:hover {
-  transform: scale(1.05);
-  background-color: #fff;
-  cursor: pointer;
-}
-
-.export__file .export__file-options img {
-  width: 2rem;
-  height: auto;
-}
-
 .exit-link {
   position: fixed;
   top: 20px;
@@ -503,4 +431,32 @@ tbody td.active {
 
 .custom-hr {
   border-top: 1px solid #fefefe;
+}
+
+/* header */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #ddd;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.exit-link {
+  margin-right: 15px; /* Espacio entre el ícono de salida y el botón */
+}
+
+.btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.w-100 {
+  width: 100%;
 }

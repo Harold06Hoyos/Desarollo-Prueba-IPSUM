@@ -48,7 +48,9 @@ if ($succesFull) {
 
     $UserId = $register->getUserId($conn);
     $preguntas = new valRegister();
-    $preguntas->agregarPreguntas($comida_favorita, $artista_favorito, $lugar_favorito, $color_favorito, $UserId, $conn);
+    $preguntas->obtenerPreguntas($conn);
+    // $preguntas->agregarPreguntas($comida_favorita, $artista_favorito, $lugar_favorito, $color_favorito, $UserId, $conn);
+
     //------------------------------------------------------------
 } else {
     echo "

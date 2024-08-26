@@ -38,9 +38,15 @@ class logUser
                 $datos = $sql->fetch_assoc();
                 $contrasenaHash = $datos["contrasena"];
                 $userId = $datos["user_id"];
+                $rol = $datos["role"];
                 if (password_verify($contrasena, $contrasenaHash)) {
                     $_SESSION["userId"] = $userId;
-                    echo '<script>window.location.href="../view/dashboard.php";</script>';
+                    $_SESSION["role"] = $rol;
+                    if ($rol == 2)
+                        echo '<script>window.location.href="../view/dashboard.php";</script>';
+                    else {
+                        echo '<script>window.location.href="../view/dashboard_admin.php";</script>';
+                    }
                 } else {
                     echo "
                     <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>

@@ -3,7 +3,6 @@ require_once("../model/conexion.php");
 
 class User
 {
-
     public function consultar($userId)
     {
         $return = null;
@@ -28,7 +27,7 @@ class User
                 $stmt->bind_param("i", $userId);
                 $stmt->execute();
                 $return = $stmt->get_result();
-                $rutaFoto = 'C:/wamp64/www/Desarollo-Prueba-IPSUM-1/';
+                $rutaFoto = 'C:/xampp/htdocs/Desarollo-Prueba-IPSUM-1/archivos/';
 
 
                 while ($row = $return->fetch_assoc()) {

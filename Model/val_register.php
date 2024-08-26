@@ -54,23 +54,6 @@ class valRegister
         }
     }
 
-    public function validarLongitudMinima($nombre)
-    {
-        $longitud = strlen($nombre);
-
-        try {
-            if ($longitud < 5) {
-                echo "El campo debe tener al menos 5 caracteres.";
-            } else {
-
-                echo "Campo válido, se procederá a almacenar.";
-            }
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-        } // Validar la longitud
-
-    }
-
     function subirArchivo($cedula, $registrador, $programa, $fecha, $certificador, $archivo)
     {
         $nombreArchivo = $archivo['name'];
@@ -115,11 +98,11 @@ class valRegister
         $nombreArchivo = $foto['name'];
         $archivoTemporal = $foto['tmp_name'];
 
-        $carpetaDestino = 'C:/wamp64/www/Desarollo-Prueba-IPSUM-1/archivos/';
+        $carpetaDestino = 'C:/xampp/htdocs/Desarollo-Prueba-IPSUM-1/archivos/';
         $rutaDestino = $carpetaDestino . $nombreArchivo;
 
         if (move_uploaded_file($archivoTemporal, $rutaDestino)) {
-            $sql = "INSERT INTO usuarios (first_name, last_name, email, phone, country, contrasena, role, archivo) VALUES ('$nombre', '$apellido', '$email', '$telefono', '$pais', '$passHash', '$rol', '$rutaDestino')";
+            $sql = "INSERT INTO usuarios (first_name, last_name, email, phone, country, contrasena, `role`, archivo) VALUES ('$nombre', '$apellido', '$email', '$telefono', '$pais', '$passHash', '$rol', '$rutaDestino')";
             try {
                 $ejecutar = mysqli_query($conexion, $sql);
                 if ($ejecutar) {
@@ -219,5 +202,39 @@ class valRegister
             // Si no hay resultados, puedes retornar null o un valor por defecto
             return null;
         }
+    }
+
+
+    public function Recaptcha($keyCaptcha)
+    {
+        $succesFull = false;
+
+        if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
+
+            $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $keyCaptcha . '&response=' . $_POST['g-recaptcha-response']);
+            $responseData = json_decode($verifyResponse);
+
+            if ($responseData->success) {
+                $succesFull = true;
+            } else {
+
+                echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script language='JavaScript'>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la validación reCAPTCHA',
+                    confirmButtonColor: '#D63030',
+                    confirmButtonText: 'OK',
+                    timer: 6000
+                }).then(() => {
+                    location.assign('../view/register.php');
+                });
+            });
+            </script>";
+            }
+        }
+        return $succesFull;
     }
 }

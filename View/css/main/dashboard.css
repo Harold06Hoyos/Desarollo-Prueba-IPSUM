@@ -59,3 +59,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+/*         <div class="input-group">
+            <button class="btn btn-success w-100" onclick="location.href='user_login.php'">Editar Preguntas?</button>
+        </div> */

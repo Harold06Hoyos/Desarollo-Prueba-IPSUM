@@ -28,4 +28,20 @@ class valPreguntas
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function obtenerPreguntas($conexion)
+    {
+        $sql = $conexion->query("SELECT * FROM preguntas");
+
+        if ($sql->num_rows > 0) {
+            $preguntas = [];
+            while ($row = $sql->fetch_assoc()) {
+                $preguntas[] = $row;
+            }
+            var_dump($preguntas);
+            return $preguntas;
+        } else {
+            return []; // Retornar un array vacío si no hay resultados
+        }
+    }
 }

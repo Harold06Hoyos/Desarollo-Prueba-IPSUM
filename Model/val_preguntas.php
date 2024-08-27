@@ -1,34 +1,7 @@
 <?php
-
+require_once("../model/conexion.php");
 class valPreguntas
 {
-    public function agregarPreguntas($comida_favorita, $artista_favorito, $lugar_favorito, $color_favorito, $conexion)
-    {
-        // Establecer la consulta SQL
-        $user = 1;
-        $sql = "INSERT INTO preguntas (user_id, favorite_food, favorite_artist, favorite_place, 	favorite_color) VALUES ('$user, $comida_favorita, $artista_favorito, $lugar_favorito, $color_favorito')";
-
-        try {
-            $ejecutar = mysqli_query($conexion, $sql);
-            if ($ejecutar) {
-                echo "
-                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-                    <script language='JavaScript'>
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Preguntas agregadas exitosamente!',
-                            showConfirmButton: false,
-                            timer: 6000
-                        }).then(() => {
-                            location.assign('../view/register.php');
-                        });
-                    </script>";
-            }
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
     public function obtenerPreguntas($conexion)
     {
         $sql = $conexion->query("SELECT * FROM preguntas");
@@ -38,10 +11,42 @@ class valPreguntas
             while ($row = $sql->fetch_assoc()) {
                 $preguntas[] = $row;
             }
-            var_dump($preguntas);
+            //  var_dump($preguntas[0]['question']);
             return $preguntas;
         } else {
+
             return []; // Retornar un array vacío si no hay resultados
+        }
+    }
+
+    public function actualizarPreguntas($question1, $question2, $question3, $question4, $conexion)
+    {
+        // Suponiendo que ya tienes una conexión $conexion
+        $sql = "UPDATE preguntas SET 
+        question = CASE 
+            WHEN question_id = 1 THEN ? 
+            WHEN question_id = 2 THEN ? 
+            WHEN question_id = 3 THEN ? 
+            WHEN question_id = 4 THEN ? 
+        END
+        WHERE question_id IN (1, 2, 3, 4)";
+
+        if ($stmt = $this->$conexion->prepare($sql)) {
+            // Vincular parámetros
+            $stmt->bind_param('ssss', $question1, $question2, $question3, $question4);
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                // Devolver verdadero en caso de éxito
+                return true;
+            } else {
+                // Manejar el error de ejecución
+                echo "Error al actualizar las preguntas: " . $stmt->error;
+                return false;
+            }
+        } else {
+            // Manejar el error de preparación
+            echo "Error en la preparación de la consulta: " . $this->$conexion->error;
+            return false;
         }
     }
 }

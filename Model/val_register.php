@@ -1,6 +1,4 @@
 <?php
-
-
 class valRegister
 {
 
@@ -55,43 +53,6 @@ class valRegister
         }
     }
 
-    function subirArchivo($cedula, $registrador, $programa, $fecha, $certificador, $archivo)
-    {
-        $nombreArchivo = $archivo['name'];
-        $archivoTemporal = $archivo['tmp_name'];
-
-        // Ruta relativa al directorio accesible desde el navegador
-        $carpetaDestino = '../archivos/';
-
-        // Crear la ruta completa
-        $rutaDestino = $carpetaDestino . basename($nombreArchivo);
-
-        // Mover el archivo al destino
-        if (move_uploaded_file($archivoTemporal, $rutaDestino)) {
-            $conexion = new Conexion();
-            $conn = $conexion->conMysql();
-
-            // Usar consultas preparadas para prevenir inyección SQL
-            $sql = "INSERT INTO tbl_certificados (cedula, registrador, programa, fecha, certificador, nombre_archivo, archivo) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssssss", $cedula, $registrador, $programa, $fecha, $certificador, $nombreArchivo, $rutaDestino);
-
-            // Ejecutar la consulta y cerrar la conexión
-            if ($stmt->execute()) {
-                $stmt->close();
-                $conn->close();
-                return true; // Éxito
-            } else {
-                // Manejar errores de SQL aquí
-                error_log("Error al ejecutar la consulta: " . $stmt->error);
-            }
-        }
-
-        return false; // Error
-    }
-
-
-
     // registro de usuario
     public function registerUser($nombre, $apellido, $email, $telefono, $pais, $passHash, $rol, $foto, $conexion)
     {
@@ -99,7 +60,7 @@ class valRegister
         $nombreArchivo = $foto['name'];
         $archivoTemporal = $foto['tmp_name'];
 
-        $carpetaDestino = 'C:/xampp/htdocs/Desarollo-Prueba-IPSUM-1/archivos/';
+        $carpetaDestino = 'C:/xampp/htdocs/Desarollo-Prueba-IPSUM-1/archivos';
         $rutaDestino = $carpetaDestino . $nombreArchivo;
 
         if (move_uploaded_file($archivoTemporal, $rutaDestino)) {
@@ -165,27 +126,32 @@ class valRegister
     }
 
     // Agregar preguntas
-    public function agregarPreguntas($comida_favorita, $artista_favorito, $lugar_favorito, $color_favorito, $user_id,  $conexion)
+    public function agregarPreguntas($question1, $answer1, $question2, $answer2, $question3, $answer3, $question4, $answer4, $UserId, $conexion)
     {
         // Establecer la consulta SQL
-        $sql = "INSERT INTO preguntas (favorite_food, favorite_artist, favorite_place, favorite_color, user_id) VALUES ('$comida_favorita', '$artista_favorito', '$lugar_favorito', '$color_favorito', $user_id)";
-        try {
-            $ejecutar = mysqli_query($conexion, $sql);
-            if ($ejecutar) {
-                // Acción exitosa, puedes redirigir directamente o mostrar un mensaje en PHP
+        $sql = "INSERT INTO answers (pregunta_1, respuesta_1, pregunta_2, respuesta_2, pregunta_3, respuesta_3, pregunta_4, respuesta_4, user_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        // Preparar la consulta para evitar inyecciones SQL
+        if ($stmt = mysqli_prepare($conexion, $sql)) {
+            // Vincular los parámetros
+            mysqli_stmt_bind_param($stmt, "ssssssssi", $question1, $answer1, $question2, $answer2, $question3, $answer3, $question4, $answer4, $UserId);
+
+            // Ejecutar la consulta
+            if (mysqli_stmt_execute($stmt)) {
+                // Acción exitosa, redirigir
                 header('Location: ../view/user_login.php');
                 exit;
             } else {
-                // En caso de error, puedes redirigir o mostrar un mensaje de error
+                // En caso de error, redirigir a una página de error
                 header('Location: ../view/register.php?error=1');
                 exit;
             }
-        } catch (Exception $e) {
-            // Manejo de excepciones, mostrar un mensaje o redirigir a una página de error
-            echo "Error: " . $e->getMessage();
+        } else {
+            // Manejo de errores si la preparación falla
+            echo "Error en la preparación de la consulta: " . mysqli_error($conexion);
         }
     }
-
 
     public function getUserId($conexion)
     {

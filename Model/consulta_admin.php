@@ -8,7 +8,7 @@ class Admin
         $sql = "
         SELECT u.*, p.*
         FROM usuarios AS u
-        LEFT JOIN preguntas AS p ON u.user_id = p.user_id
+        LEFT JOIN answers AS p ON u.user_id = p.user_id
         ";
 
         $resultado = mysqli_query($conexion, $sql);

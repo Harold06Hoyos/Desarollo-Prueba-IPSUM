@@ -8,6 +8,7 @@ if (!isset($_SESSION["role"])) {
 
 // Incluir el archivo PHP que devuelve los datos de usuario
 $usuariosAdmin = require_once("../model/consulta_admin.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,13 +21,21 @@ $usuariosAdmin = require_once("../model/consulta_admin.php");
     <title>Consultar Usuarios</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" integrity="..." crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/dasboard_admin/admin.css" />
+    <link rel="stylesheet" type="text/css" href="css/dasboard_admin/header.css" />
 </head>
+<header class="header">
+    <div class="header">
+        <div class="input-group">
+            <a class="exit-link" href="../model/cerrar_session.php">
+                <i class="fa fa-right-from-bracket fa-beat" style="color: #ff0000"></i>
+            </a>
+        </div>
+    </div>
+</header>
 
 <body>
-    <a class="exit-link" href="../model/cerrar_session.php">
-        <i class="fa fa-right-from-bracket fa-beat" style="color: #ff0000"></i>
-    </a>
-    <main class="table" id="customers_table">
+
+    <main class=" table" id="customers_table">
         <section class="table__header">
             <h1>Usuarios</h1>
             <div class="input-group">
@@ -46,11 +55,14 @@ $usuariosAdmin = require_once("../model/consulta_admin.php");
                         <th>Telefono <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Pais <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Rol <span class="icon-arrow">&UpArrow;</span></th>
-                        <th>Comida favorita <span class="icon-arrow">&UpArrow;</span></th>
-                        <th>Artista favorito <span class="icon-arrow">&UpArrow;</span></th>
-                        <th>Lugar favorito <span class="icon-arrow">&UpArrow;</span></th>
-                        <th>Color favorito <span class="icon-arrow">&UpArrow;</span></th>
-
+                        <th>Pregunta #1<span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Respuesta #1 <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Pregunta<span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Respuesta #2<span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Pregunta<span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Respuesta #3<span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Pregunta<span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Respuesta #4<span class="icon-arrow">&UpArrow;</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,10 +74,14 @@ $usuariosAdmin = require_once("../model/consulta_admin.php");
                             <td><?php echo htmlspecialchars($usuario['phone']); ?></td>
                             <td><?php echo htmlspecialchars($usuario['country']); ?></td>
                             <td><?php echo htmlspecialchars($usuario['role']); ?></td>
-                            <td><?php echo htmlspecialchars($usuario['favorite_food']); ?></td>
-                            <td><?php echo htmlspecialchars($usuario['favorite_artist']); ?></td>
-                            <td><?php echo htmlspecialchars($usuario['favorite_place']); ?></td>
-                            <td><?php echo htmlspecialchars($usuario['favorite_color']); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['pregunta_1']); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['respuesta_1']); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['pregunta_2']); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['respuesta_2']); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['pregunta_3']); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['respuesta_3']); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['pregunta_4']); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['respuesta_4']); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

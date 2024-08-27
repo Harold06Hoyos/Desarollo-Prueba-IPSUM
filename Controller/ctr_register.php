@@ -20,13 +20,15 @@ $confirmar_contrasena = $_POST['confirmar_contrasena'];
 $foto = $_FILES['foto'];
 $rol = "2";
 
-// ----------------------------------------------------------
-// preguntas
-$comida_favorita = $_POST['comida_favorita'];
-$artista_favorito = $_POST['artista_favorito'];
-$lugar_favorito = $_POST['lugar_favorito'];
-$color_favorito = $_POST['color_favorito'];
-
+// preguntas y respuestas
+$question1 = $_POST['question_1_hidden'];
+$question2 = $_POST['question_2_hidden'];
+$question3 = $_POST['question_3_hidden'];
+$question4 = $_POST['question_4_hidden'];
+$answer1 = $_POST['answer_1'];
+$answer2 = $_POST['answer_2'];
+$answer3 = $_POST['answer_3'];
+$answer4 = $_POST['answer_4'];
 // ----------------------------------------------------------
 // metodos
 // ----------------------------------------------------------
@@ -47,9 +49,8 @@ if ($succesFull) {
     //------------------------------------------------------------
 
     $UserId = $register->getUserId($conn);
-    $preguntas = new valRegister();
-    $preguntas->obtenerPreguntas($conn);
-    // $preguntas->agregarPreguntas($comida_favorita, $artista_favorito, $lugar_favorito, $color_favorito, $UserId, $conn);
+    $agregarObtenidas = new valRegister();
+    $agregarObtenidas->agregarPreguntas($question1, $answer1, $question2, $answer2, $question3, $answer3, $question4, $answer4, $UserId, $conn);
 
     //------------------------------------------------------------
 } else {

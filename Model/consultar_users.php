@@ -16,10 +16,10 @@ class User
             }
 
             $sql = "
-            SELECT c.*, p.*
-            FROM usuarios as c
-            INNER JOIN preguntas as p ON p.user_id = c.user_id
-            WHERE c.user_id = ?
+            SELECT u.*, a.*
+            FROM usuarios AS u
+            INNER JOIN answers AS a ON a.user_id = u.user_id
+            WHERE u.user_id = ?
             ";
 
             if ($stmt = $conn->prepare($sql)) {

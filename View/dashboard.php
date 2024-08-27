@@ -41,10 +41,10 @@ $users = $classUser->consultar($id);
                     <p><span class="user-label">Email:</span> <?php echo $user["email"]; ?></p>
                     <p><span class="user-label">Teléfono:</span> <?php echo $user["phone"]; ?></p>
                     <p><span class="user-label">País:</span> <?php echo $user["country"]; ?></p>
-                    <p><span class="user-label">Comida favorita:</span> <?php echo $user["favorite_food"]; ?></p>
-                    <p><span class="user-label">Artista favorito:</span> <?php echo $user["favorite_artist"]; ?></p>
-                    <p><span class="user-label">Lugar favorito:</span> <?php echo $user["favorite_place"]; ?></p>
-                    <p><span class="user-label">Color favorito:</span> <?php echo $user["favorite_color"]; ?></p>
+                    <p><span class="user-label"><?php echo $user["pregunta_1"]; ?>: </span> <?php echo $user["respuesta_1"]; ?></p>
+                    <p><span class="user-label"><?php echo $user["pregunta_2"]; ?>: </span> <?php echo $user["respuesta_2"]; ?></p>
+                    <p><span class="user-label"><?php echo $user["pregunta_3"]; ?>:</span> <?php echo $user["respuesta_3"]; ?></p>
+                    <p><span class="user-label"><?php echo $user["pregunta_4"]; ?>::</span> <?php echo $user["respuesta_4"]; ?></p>
                 </div>
             <?php } ?>
         </div>

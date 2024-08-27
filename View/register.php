@@ -1,3 +1,7 @@
+<?php
+require_once("../Controller/ctr_getPreguntas.php");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -60,25 +64,36 @@
                     <input type="text" class="form-control" id="pais" name="pais">
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label for="comida">Comida favorita</label>
-                        <input type="text" class="form-control" id="comida" name="comida_favorita">
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label for="artista">Artista favorito</label>
-                        <input type="text" class="form-control" id="artista" name="artista_favorito">
-                    </div>
-                </div>
+                <?php
+                $obtenerPreguntas = new valPreguntas();
+                $preguntas = $obtenerPreguntas->obtenerPreguntas($conn);
+                $question1 = $preguntas[0]['question'] ?? '';
+                $question2 = $preguntas[1]['question'] ?? '';
+                $question3 = $preguntas[2]['question'] ?? '';
+                $question4 = $preguntas[3]['question'] ?? ''; ?>
 
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <label for="lugar">Lugar favorito</label>
-                        <input type="text" class="form-control" id="lugar" name="lugar_favorito">
+                        <label for="question1" id="label_question_1"><?php echo htmlspecialchars($question1); ?></label>
+                        <input type="hidden" id="hidden_question_1" name="question_1_hidden" value="<?php echo htmlspecialchars($question1); ?>">
+                        <input type="text" class="form-control" id="answer_1" name="answer_1">
                     </div>
                     <div class="col-md-6 form-group">
-                        <label for="color">Color favorito</label>
-                        <input type="text" class="form-control" id="color" name="color_favorito">
+                        <label for="question2" id="label_question_2"><?php echo htmlspecialchars($question2); ?></label>
+                        <input type="hidden" id="hidden_question_2" name="question_2_hidden" value="<?php echo htmlspecialchars($question2); ?>">
+                        <input type="text" class="form-control" id="answer_2" name="answer_2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="question3" id="label_question_3"><?php echo htmlspecialchars($question3); ?></label>
+                        <input type="hidden" id="hidden_question_3" name="question_3_hidden" value="<?php echo htmlspecialchars($question3); ?>">
+                        <input type="text" class="form-control" id="answer_3" name="answer_3">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="question4" id="label_question_4"><?php echo htmlspecialchars($question4); ?></label>
+                        <input type="hidden" id="hidden_question_4" name="question_4_hidden" value="<?php echo htmlspecialchars($question4); ?>">
+                        <input type="text" class="form-control" id="answer_4" name="answer_4">
                     </div>
                 </div>
 

@@ -1,5 +1,6 @@
 <?php
 
+
 class valRegister
 {
 
@@ -236,30 +237,5 @@ class valRegister
             }
         }
         return $succesFull;
-    }
-    public function obtenerPreguntas($conexion)
-    {
-        $sql = $conexion->query("SELECT * FROM preguntas");
-
-        if ($sql->num_rows > 0) {
-            echo "
-                    <scrip src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-                    <scrip language='JavaScript'>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Este usuario no esta registrado',
-                            showCancelButton: false,
-                            confirmButtonColor: '#FF0000',
-                            confirmButtonText: 'OK',
-                            timer: 6000
-                        }).then(() => {
-                            location.assign('../view/register.php');
-                        });
-                    });
-                    </script>";
-            exit();
-        }
-        var_dump($sql);
     }
 }

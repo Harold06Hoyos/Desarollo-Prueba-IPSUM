@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #ddd;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.exit-link {
+  margin-right: 15px; /* Espacio entre el ícono de salida y el botón */
+}
+
+.btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.w-100 {
+  width: 100%;
+}

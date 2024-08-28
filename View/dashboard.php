@@ -22,19 +22,22 @@ $users = $classUser->consultar($id);
 </head>
 
 <body>
-    <div>
+    <div class="header-container">
         <a class="exit-link" href="../model/cerrar_session.php">
-            <i class="fa fa-right-from-bracket fa-beat" style="color: #ff0000"></i>
+            <i class="fa fa-right-from-bracket fa-beat"></i>
+            <span class="exit-text">Cerrar Sesión</span>
         </a>
     </div>
+
+
 
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="user-card">
             <?php foreach ($users as $user) { ?>
                 <div class="user-photo">
                     <!-- <img src="<?php echo $user['archivo']; ?>" alt="Foto de Usuario"> -->
-                    <img src="../archivos/<?php echo $user['archivo']; ?>" alt="Foto de Usuario">
-
+                    <img src="../archivos<?php echo $user['archivo']; ?>" alt="Foto de Usuario">
+                    <?php var_dump($user['archivo']) ?>
                 </div>
                 <div class="user-info">
                     <h3><?php echo $user["first_name"] . " " . $user["last_name"]; ?></h3>

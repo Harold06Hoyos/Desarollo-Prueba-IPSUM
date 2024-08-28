@@ -67,32 +67,29 @@ require_once("../Controller/ctr_getPreguntas.php");
                 <?php
                 $obtenerPreguntas = new valPreguntas();
                 $preguntas = $obtenerPreguntas->obtenerPreguntas($conn);
-                $question1 = $preguntas[0]['question'] ?? '';
-                $question2 = $preguntas[1]['question'] ?? '';
-                $question3 = $preguntas[2]['question'] ?? '';
-                $question4 = $preguntas[3]['question'] ?? ''; ?>
+                ?>
 
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <label for="question1" id="label_question_1"><?php echo htmlspecialchars($question1); ?></label>
-                        <input type="hidden" id="hidden_question_1" name="question_1_hidden" value="<?php echo htmlspecialchars($question1); ?>">
+                        <label for="question1" id="label_question_1"><?php echo htmlspecialchars($preguntasObtenidas[0]['question']); ?></label>
+                        <input type="hidden" id="hidden_question_1" name="question_1_hidden" value="<?php echo htmlspecialchars($preguntasObtenidas[0]['question']); ?>">
                         <input type="text" class="form-control" id="answer_1" name="answer_1">
                     </div>
                     <div class="col-md-6 form-group">
-                        <label for="question2" id="label_question_2"><?php echo htmlspecialchars($question2); ?></label>
-                        <input type="hidden" id="hidden_question_2" name="question_2_hidden" value="<?php echo htmlspecialchars($question2); ?>">
+                        <label for="question2" id="label_question_2"><?php echo htmlspecialchars($preguntasObtenidas[1]['question']); ?></label>
+                        <input type="hidden" id="hidden_question_2" name="question_2_hidden" value="<?php echo htmlspecialchars($preguntasObtenidas[1]['question']); ?>">
                         <input type="text" class="form-control" id="answer_2" name="answer_2">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <label for="question3" id="label_question_3"><?php echo htmlspecialchars($question3); ?></label>
-                        <input type="hidden" id="hidden_question_3" name="question_3_hidden" value="<?php echo htmlspecialchars($question3); ?>">
+                        <label for="question3" id="label_question_3"><?php echo htmlspecialchars($preguntasObtenidas[2]['question']); ?></label>
+                        <input type="hidden" id="hidden_question_3" name="question_3_hidden" value="<?php echo htmlspecialchars($preguntasObtenidas[2]['question']); ?>">
                         <input type="text" class="form-control" id="answer_3" name="answer_3">
                     </div>
                     <div class="col-md-6 form-group">
-                        <label for="question4" id="label_question_4"><?php echo htmlspecialchars($question4); ?></label>
-                        <input type="hidden" id="hidden_question_4" name="question_4_hidden" value="<?php echo htmlspecialchars($question4); ?>">
+                        <label for="question4" id="label_question_4"><?php echo htmlspecialchars($preguntasObtenidas[3]['question']); ?></label>
+                        <input type="hidden" id="hidden_question_4" name="question_4_hidden" value="<?php echo htmlspecialchars($preguntasObtenidas[3]['question']); ?>">
                         <input type="text" class="form-control" id="answer_4" name="answer_4">
                     </div>
                 </div>

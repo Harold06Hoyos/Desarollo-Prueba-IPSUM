@@ -46,6 +46,7 @@ if ($succesFull) {
     $register->existUser($email, $conn);
     $register->comparePassword($confirmar_contrasena, $contrasena);
     $register->registerUser($nombre, $apellido, $email, $telefono, $pais, $passHash, $rol, $foto, $conn);
+    // $register->validarContrasena($email, $conn);
     //------------------------------------------------------------
 
     $UserId = $register->getUserId($conn);

@@ -40,7 +40,8 @@ class valPreguntas
                 return true;
             } else {
                 // Manejar el error de ejecución
-                echo "Error al actualizar las preguntas: " . $stmt->error;
+                //echo "Error al actualizar las preguntas: " . $stmt->error;
+                header('Location: ../view/dashboardPreguntas.php?error=1');
                 return false;
             }
         } else {

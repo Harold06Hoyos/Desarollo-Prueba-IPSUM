@@ -25,6 +25,9 @@
                 <input type="password" name="contrasena" required>
                 <br>
                 <input type="submit" value="Login">
+                <div class="register-link">
+                    <p>No tienes una cuenta? <a href="../view/register.php">Regístrate aquí</a></p>
+                </div>
             </form>
         </div>
     </div>

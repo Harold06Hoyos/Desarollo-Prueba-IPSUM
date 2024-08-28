@@ -31,7 +31,7 @@ class User
 
 
                 while ($row = $return->fetch_assoc()) {
-                    $rutaRelativa = str_replace($rutaFoto, '../', $row['archivo']);
+                    $rutaRelativa = str_replace($rutaFoto, '', $row['archivo']);
                     $row['archivo'] = $rutaRelativa;
                     $usuarios[] = $row;
                 }

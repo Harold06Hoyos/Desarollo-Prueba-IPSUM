@@ -23,17 +23,19 @@ $usuariosAdmin = require_once("../model/consulta_admin.php");
     <link rel="stylesheet" type="text/css" href="css/dasboard_admin/admin.css" />
     <link rel="stylesheet" type="text/css" href="css/dasboard_admin/header.css" />
 </head>
-<header class="header">
-    <div class="header">
-        <div class="input-group">
-            <a class="exit-link" href="../model/cerrar_session.php">
-                <i class="fa fa-right-from-bracket fa-beat" style="color: #ff0000"></i>
-            </a>
-        </div>
-    </div>
-</header>
+
+
 
 <body>
+    <div class="header">
+        <div class="header-container">
+            <a class="exit-link" href="../model/cerrar_session.php">
+                <i class="fa fa-right-from-bracket fa-beat"></i>
+                <span class="exit-text">Cerrar Sesión</span>
+            </a>
+        </div>
+
+    </div>
 
     <main class=" table" id="customers_table">
         <section class="table__header">

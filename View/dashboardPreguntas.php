@@ -24,25 +24,22 @@ require_once("../Controller/ctr_getPreguntas.php");
 <body>
     <div action="../controller/ctr_getPreguntas.php" class="form-container">
         <form>
-            <?php
-
-            ?>
 
             <div class="form-group">
                 <label for="input1"><?php echo htmlspecialchars($preguntasObtenidas[0]['question']); ?>:</label>
-                <input type="text" id="input1" name="input1" value="<?php echo htmlspecialchars(''); ?>">
+                <input type="text" id="cambiarPregunta1" name="cambiarPregunta1">
             </div>
             <div class="form-group">
                 <label for="input2"><?php echo htmlspecialchars($preguntasObtenidas[1]['question']); ?>:</label>
-                <input type="text" id="input2" name="input2" value="<?php echo htmlspecialchars(''); ?>">
+                <input type="text" id="input2" name="input2">
             </div>
             <div class="form-group">
                 <label for="input3"><?php echo htmlspecialchars($preguntasObtenidas[2]['question']); ?>:</label>
-                <input type="text" id="input3" name="input3" value="<?php echo htmlspecialchars(''); ?>">
+                <input type="text" id="input3" name="input3" value=">
             </div>
-            <div class="form-group">
+            <div class=" form-group">
                 <label for="input4"><?php echo htmlspecialchars($preguntasObtenidas[3]['question']); ?></label>
-                <input type="text" id="input4" name="input4" value="<?php echo htmlspecialchars(''); ?>">
+                <input type="text" id="input4" name="input4">
             </div>
             <div class="form-group">
                 <button type="submit">Enviar</button>

@@ -28,6 +28,10 @@ class valRegister
         }
     }
 
+
+
+
+
     // verificacion de contraseñas
     public function comparePassword($contrasena, $confirmar_contrasena)
     {
@@ -51,6 +55,68 @@ class valRegister
                     </script>";
             die();
         }
+        // Verificar que la contraseña tenga al menos 8 caracteres
+        if (strlen($contrasena) < 8) {
+            echo "
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script language='JavaScript'>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'La contraseña debe tener al menos 8 caracteres',
+                            showCancelButton: false,
+                            confirmButtonColor: '#FF0000',
+                            confirmButtonText: 'OK',
+                            timer: 6000
+                        }).then(() => {
+                            location.assign('../view/register.php');
+                        });
+                    });
+                    </script>";
+            die();
+        }
+
+        // Verificar que la contraseña incluya al menos una letra mayúscula
+        /*if (!preg_match('/[A-Z]/', $contrasena)) {
+            echo "
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script language='JavaScript'>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'La contraseña debe incluir al menos una letra mayúscula',
+                            showCancelButton: false,
+                            confirmButtonColor: '#FF0000',
+                            confirmButtonText: 'OK',
+                            timer: 6000
+                        }).then(() => {
+                            location.assign('../view/register.php');
+                        });
+                    });
+                    </script>";
+            die();
+        }
+
+        // Verificar que la contraseña incluya al menos un número
+        if (!preg_match('/[0-9]/', $contrasena)) {
+            echo "
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script language='JavaScript'>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'La contraseña debe incluir al menos un número',
+                            showCancelButton: false,
+                            confirmButtonColor: '#FF0000',
+                            confirmButtonText: 'OK',
+                            timer: 6000
+                        }).then(() => {
+                            location.assign('../view/register.php');
+                        });
+                    });
+                    </script>";
+            die();
+        }*/
     }
 
     // registro de usuario
@@ -60,8 +126,10 @@ class valRegister
         $nombreArchivo = $foto['name'];
         $archivoTemporal = $foto['tmp_name'];
 
-        $carpetaDestino = 'C:/xampp/htdocs/Desarollo-Prueba-IPSUM-1/archivos';
+        $carpetaDestino = 'C:/xampp/htdocs/Desarollo-Prueba-IPSUM-1/archivos/';
         $rutaDestino = $carpetaDestino . $nombreArchivo;
+
+
 
         if (move_uploaded_file($archivoTemporal, $rutaDestino)) {
             $sql = "INSERT INTO usuarios (first_name, last_name, email, phone, country, contrasena, `role`, archivo) VALUES ('$nombre', '$apellido', '$email', '$telefono', '$pais', '$passHash', '$rol', '$rutaDestino')";
@@ -140,6 +208,22 @@ class valRegister
             // Ejecutar la consulta
             if (mysqli_stmt_execute($stmt)) {
                 // Acción exitosa, redirigir
+                echo "
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script language='JavaScript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Usuario Almacenado Exitosamente',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        timer: 5000
+                    }).then(() => {
+                        location.assign('../view/user_login.php');
+                    });
+                });
+                </script>";
                 header('Location: ../view/user_login.php');
                 exit;
             } else {
